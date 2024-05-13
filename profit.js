@@ -1,67 +1,46 @@
-function rearrangeArraysDescending(time, earning,toConstruct) {
-    const earningPerUnitTime = calculateEarningsPerUnitTime(time, earning)
-  
-    const combinedArray = time.map((t, index) => ({
-      time: t,
-      earning: earning[index],
-      earningPerUnitTime: earningPerUnitTime[index],
-      toConstruct: toConstruct[index],
-    }))
-  
-    combinedArray.sort((a, b) => b.earningPerUnitTime - a.earningPerUnitTime)
-  
-    const rearrangedTime = combinedArray.map((item) => item.time)
-    const rearrangedEarning = combinedArray.map((item) => item.earning)
-    const rearrangedBuildings = combinedArray.map((item) => item.toConstruct)
-  
-    return { rearrangedTime, rearrangedEarning,rearrangedBuildings }
-  }
-  
-  function calculateEarningsPerUnitTime(time, earning) {
-    const earningPerUnitTime = time.map((t, index) => earning[index] / t)
-    return earningPerUnitTime
-  }
-  
-  
-  let constructedBuildings = [0, 0, 0]
-  function maxProfit(n) {
-    let profit = 0
-    let currentIndex
-  
-    if (n < Math.min(...rearrangedTime)) {
-      return 0
-    } else if (n > rearrangedTime[0]) {
-      let temp = n - rearrangedTime[0]
-      profit += temp * rearrangedEarning[0]
-      currentIndex = 0
-      constructedBuildings[0]++
-    } else if (n > rearrangedTime[1]) {
-      let temp = n - rearrangedTime[1]
-      profit += temp * rearrangedEarning[1]
-      currentIndex = 1
-      constructedBuildings[1]++
-    }else {
-      let temp = n - rearrangedTime[2]
-      profit += temp * rearrangedEarning[2]
-      currentIndex = 2
-      constructedBuildings[2]++
+const testcases = [
+  { time: 7, earning: 3000 },
+  { time: 8, earning: 4500 },
+  { time: 13, earning: 16500 }
+];
+
+
+const CreationTime=[5,4,10]
+const earnings=[1500,1000,3000]
+
+function Solverfunction(inputfromuser){
+    let result = []
+    const givendataforBusiness = [{name:'T', earning:1500, developmentTime:5}, {name:'P', earning:1000, developmentTime:4}, {name:'C', earning:3000, developmentTime:10}]
+    for(let i = 0; i<givendataforBusiness.length; i++){
+        let bussiness = givendataforBusiness[i]
+        if(inputfromuser.time < bussiness.developmentTime){
+            continue
+        }else{
+            let Totalbusiness = parseInt(inputfromuser.time / bussiness.developmentTime)
+            let totalBussinessRunningTime = 0
+            let totalTimeSpentInDevelopment  = 0
+            for(let i = 1; i<= Totalbusiness; i++){
+                let bussinessRunningTime = (inputfromuser.time - totalTimeSpentInDevelopment ) - bussiness.developmentTime
+                totalBussinessRunningTime += bussinessRunningTime
+                totalTimeSpentInDevelopment += bussiness.developmentTime
+            }
+            let totalEarningFromBussiness = totalBussinessRunningTime * bussiness.earning
+            if(totalEarningFromBussiness == inputfromuser.earning){
+                let solution = {'T':0, 'P':0, 'C':0}
+                solution[bussiness.name] = Totalbusiness
+                result.push(solution)
+            }
+        }
     }
-  
-    return profit + maxProfit(n-rearrangedTime[currentIndex])
-  }
-  
-  // Input here. You can also change n,time array, earning array to get Max profit 
-  const n = 20
-  const time = [4, 5, 10]
-  const earning = [1000, 1500, 3000]
-  const toConstruct = ["Pub", "Theatre", "Commercial Park"]
-  
-  let { rearrangedTime, rearrangedEarning, rearrangedBuildings } =
-    rearrangeArraysDescending(time, earning, toConstruct)
-  
-  console.log(`Earnings - $${maxProfit(n)}`)
-  console.log(
-    rearrangedBuildings
-      .map((item, index) => `${item} - ${constructedBuildings[index]}`)
-      .join(", ")
-  )
+    let index=1;
+    result.forEach(res=>{
+        console.log(index++,res);
+    })
+    return result
+}
+
+testcases.forEach(testcase=>{
+    console.log(testcase)
+    Solverfunction(testcase)
+    console.log("")
+})
