@@ -10,19 +10,19 @@ const earnings=[1500,1000,3000]
 
 function Solverfunction(inputfromuser){
     let result = []
-    const givendataforBusiness = [{name:'T', earning:1500, developmentTime:5}, {name:'P', earning:1000, developmentTime:4}, {name:'C', earning:3000, developmentTime:10}]
+    const givendataforBusiness = [{name:'T', earning:1500, giventime:5}, {name:'P', earning:1000, giventime:4}, {name:'C', earning:3000, giventime:10}]
     for(let i = 0; i<givendataforBusiness.length; i++){
         let bussiness = givendataforBusiness[i]
-        if(inputfromuser.time < bussiness.developmentTime){
+        if(inputfromuser.time < bussiness.giventime){
             continue
         }else{
-            let Totalbusiness = parseInt(inputfromuser.time / bussiness.developmentTime)
+            let Totalbusiness = parseInt(inputfromuser.time / bussiness.giventime)
             let totalBussinessRunningTime = 0
             let totalTimeSpentInDevelopment  = 0
             for(let i = 1; i<= Totalbusiness; i++){
-                let bussinessRunningTime = (inputfromuser.time - totalTimeSpentInDevelopment ) - bussiness.developmentTime
+                let bussinessRunningTime = (inputfromuser.time - totalTimeSpentInDevelopment ) - bussiness.giventime
                 totalBussinessRunningTime += bussinessRunningTime
-                totalTimeSpentInDevelopment += bussiness.developmentTime
+                totalTimeSpentInDevelopment += bussiness.giventime
             }
             let totalEarningFromBussiness = totalBussinessRunningTime * bussiness.earning
             if(totalEarningFromBussiness == inputfromuser.earning){
