@@ -20,8 +20,8 @@ function Solverfunction(inputfromuser){
             let Totalbusiness = parseInt(inputfromuser.time / bussiness.giventime)
             let totaldvelopmentTimetaken  = 0;
             for(let i = 1; i<= Totalbusiness; i++){
-                let bussinessRunningTime = (inputfromuser.time - totaldvelopmentTimetaken ) - bussiness.giventime
-                totalTimeforCompletebusiness += bussinessRunningTime
+                let timeInbusiness = (inputfromuser.time - totaldvelopmentTimetaken ) - bussiness.giventime
+                totalTimeforCompletebusiness += timeInbusiness
                 totaldvelopmentTimetaken += bussiness.giventime
             }
             let totalEarningFromBussiness = totalTimeforCompletebusiness * bussiness.earning
