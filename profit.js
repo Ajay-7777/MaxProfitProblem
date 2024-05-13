@@ -16,15 +16,15 @@ function Solverfunction(inputfromuser){
         if(inputfromuser.time < bussiness.giventime){
             continue
         }else{
+            let totalTimeforCompletebusiness = 0;
             let Totalbusiness = parseInt(inputfromuser.time / bussiness.giventime)
-            let totalBussinessRunningTime = 0
-            let totalTimeSpentInDevelopment  = 0
+            let totaldvelopmentTimetaken  = 0;
             for(let i = 1; i<= Totalbusiness; i++){
-                let bussinessRunningTime = (inputfromuser.time - totalTimeSpentInDevelopment ) - bussiness.giventime
-                totalBussinessRunningTime += bussinessRunningTime
-                totalTimeSpentInDevelopment += bussiness.giventime
+                let bussinessRunningTime = (inputfromuser.time - totaldvelopmentTimetaken ) - bussiness.giventime
+                totalTimeforCompletebusiness += bussinessRunningTime
+                totaldvelopmentTimetaken += bussiness.giventime
             }
-            let totalEarningFromBussiness = totalBussinessRunningTime * bussiness.earning
+            let totalEarningFromBussiness = totalTimeforCompletebusiness * bussiness.earning
             if(totalEarningFromBussiness == inputfromuser.earning){
                 let solution = {'T':0, 'P':0, 'C':0}
                 solution[bussiness.name] = Totalbusiness
